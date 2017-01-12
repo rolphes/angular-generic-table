@@ -1,6 +1,49 @@
-<generic-table [gtClasses]="'table-hover'" #myTable [gtSettings]="configObject.settings" [gtFields]="configObject.fields" [(gtData)]="configObject.data" [gtRowComponent]="expandedRow" [gtOptions]="{stack:true, highlightSearch:true}"></generic-table>
-  <div class="text-xs-center">
-    <gt-pagination [genericTable]="myTable"></gt-pagination>
+<h3>Advanced</h3>
+<p>Fetch data using REST-service, expand rows and display custom component, use custom functions for rendering, sorting and exporting. Apply predefined filter and simple function for adding new random data to table. This example also utilizes column stacking on tablets and mobile devices so resize the browser and see what happens with the layout on smaller screens.</p>
+<div class="card">
+  <div class="card-header">Example</div>
+  <div class="card-block">
+    <form class="form form-inline" style="margin-bottom: 10px;">
+      <div class="form-group">
+        <label for="rows" class="form-control-label">Rows</label>
+        <select id="rows" class="form-control form-control-sm" #rowLength (change)="myTable.changeRowLength(rowLength.value)">
+          <option value=10>10</option>
+          <option value=25>25</option>
+          <option value=50>50</option>
+          <option value=100>100</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <input class="form-control form-control-sm" #search (keyup)="applySearch(search.value)" placeholder="Search"/>
+      </div>
+      <div class="form-group">
+        <button class="btn btn-secondary btn-sm btn-block" (click)="applyFilter();">Apply predefined filter</button>
+      </div>
+      <div class="form-group">
+        <button class="btn btn-secondary btn-sm btn-block" (click)="myTable.gtClearFilter()">Remove filter</button></div>
+      <div class="form-group">
+        <button class="btn btn-secondary btn-sm btn-block" (click)="addData()">Add data</button></div>
+      <div class="form-group">
+        <button class="btn btn-secondary btn-sm btn-block" (click)="showColumnControls = !showColumnControls">Toggle columns</button></div>
+      <div class="form-group">
+        <button class="btn btn-secondary btn-sm btn-block" (click)="myTable.exportCSV()">Export to CSV</button>
+      </div>
+      <div class="form-group" *ngIf="showColumnControls">
+        <label class="form-control-label">Visible columns</label>
+        <div class="form-check" *ngFor="let column of configObject.settings">
+          <label class="form-check-inline">
+            <input type="checkbox" name="{{column.objectKey}}" class="form-check-input" [(ngModel)]="column.visible" (change)="myTable.redraw()">
+            {{configObject.fields | gtProperty:column.objectKey:'name'}}
+          </label>
+        </div>
+      </div>
+      <small class="form-text text-muted"><gt-table-info [genericTable]="myTable"></gt-table-info></small>
+
+    </form>
+    <generic-table [gtClasses]="'table-hover'" #myTable [gtSettings]="configObject.settings" [gtFields]="configObject.fields" [(gtData)]="configObject.data" [gtRowComponent]="expandedRow" [gtOptions]="{stack:true, highlightSearch:true}"></generic-table>
+    <div class="text-xs-center">
+      <gt-pagination [genericTable]="myTable"></gt-pagination>
+    </div>
   </div>
   <div class="card-footer">
     <strong>View source</strong><br/>
@@ -8,3 +51,4 @@
     <a href="https://github.com/hjalmers/angular2-generic-table/blob/master/src/app/rest/rest.component.ts" target="_blank">Component</a><br>
     <a href="https://github.com/hjalmers/angular2-generic-table/blob/master/src/app/rest/rest.component.html" target="_blank">Markup</a><br>
   </div>
+</div>

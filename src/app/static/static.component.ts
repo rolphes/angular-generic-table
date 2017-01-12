@@ -103,12 +103,12 @@ export class StaticComponent {
         },
         {
           "id": 14,
-          "name": "?Fr",
+          "name": "Fr",
           "lucky_number": 28
         },
         {
           "id": 14,
-          "name": "F",
+          "name": "Fo",
           "lucky_number": 28
         },
         {
