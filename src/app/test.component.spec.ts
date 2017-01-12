@@ -121,7 +121,7 @@ describe('examples.component.ts', () => {
 
 });
 
-//ToDo: make spec file to work together with generic-table
+//ToDo: make spec file to work together with generic-table test
 
 /*
 describe('rest.component.ts', () => {
