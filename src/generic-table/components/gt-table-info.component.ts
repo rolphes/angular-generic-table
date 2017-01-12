@@ -33,12 +33,14 @@ export class TableInfoPipe implements PipeTransform {
     if(keys.recordsAfterSearch !== keys.recordsAll){
       text = texts.tableInfoAfterSearch;
     }
+
     for (let key in keys) {
       if( keys.hasOwnProperty(key) ) {
         let searchString = new RegExp('#'+key, 'g');
         text = text.replace(searchString,keys[key]);
       }
     }
+
     return text;
   };
 }

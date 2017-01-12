@@ -77,10 +77,13 @@ export class PaginationPipe implements PipeTransform {
     else if(totalPages === currentPage){
       pagination = [currentPage-2,currentPage-1,currentPage];
     }
-    // if current page is not one of the four first pages
+    // if current page is not one of the four first pages (last else if statement dosn't run, bug?)
     else if(totalPages-4 > currentPage){
       pagination = [currentPage-1,currentPage,currentPage+1, currentPage+2];
     }
+
+    if(pagination.length < 1) console.log('Pagination is empty');
+
     return pagination;
   }
 

@@ -26,7 +26,7 @@ export class GtVisiblePipe<R extends GtRow> implements PipeTransform {
     });
 
     let columns = array.filter((column: GtConfigField<R>) => {
-        return visibleColumns.indexOf(column.objectKey) !== -1;
+      return visibleColumns.indexOf(column.objectKey) !== -1;
     }).sort(function(a,b){
       return visibleColumns.indexOf(a.objectKey) < visibleColumns.indexOf(b.objectKey) ? -1 : 1;
     });

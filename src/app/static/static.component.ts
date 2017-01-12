@@ -17,6 +17,9 @@ export class StaticComponent {
 
   constructor() {
 
+      /*
+      * Changed back default values when got time
+      * */
 
     this.configObject = {
       settings:[{
@@ -94,7 +97,26 @@ export class StaticComponent {
         "name": "Frank",
         "lucky_number": 27
       }, {
-        "id": 13,
+          "id": 14,
+          "name": "Fra",
+          "lucky_number": 28
+        },
+        {
+          "id": 14,
+          "name": "?Fr",
+          "lucky_number": 28
+        },
+        {
+          "id": 14,
+          "name": "F",
+          "lucky_number": 28
+        },
+        {
+          "id": 13,
+          "name": "Fran",
+          "lucky_number": 29
+        },{
+        "id": 13.4,
         "name": "Kathryn",
         "lucky_number": 93
       }, {

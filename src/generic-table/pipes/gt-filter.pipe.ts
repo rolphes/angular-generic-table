@@ -17,6 +17,7 @@ export class GtFilterPipe implements PipeTransform {
 
       let length = allRows === null ? 0:allRows.length;
       gtInfo.recordsAfterFilter = length;
+
       return allRows;
     }
 
@@ -27,12 +28,10 @@ export class GtFilterPipe implements PipeTransform {
       let match = true;
 
       for (let property in filterBy) {
+
         if (filterBy.hasOwnProperty(property)) {
-          //console.log(property);
-          //console.log(filter[property].indexOf(obj[property]));
           if(filterBy[property].indexOf(rowObject[property]) === -1){
             match = false;
-
           }
         }
       }

@@ -19,7 +19,20 @@ export class GtSearchPipe<R extends GtRow> implements PipeTransform {
     }
   };
 
-  transform(allRows: any, searchTerms: string,gtInfo:GtInformation,settings: Array<GtConfigSetting>, fields: Array<GtConfigField<R>>, refreshData: number): any {
+  /*
+  * @Desc: Take in values and search === searchtearms
+  * @Param1: take in the value you wish to search for
+  * @Param2: Take in value you wish to search for compare allRows
+  * */
+
+  transform(
+    allRows: any,
+    searchTerms: string,
+    gtInfo:GtInformation,
+    settings: Array<GtConfigSetting>,
+    fields: Array<GtConfigField<R>>,
+    refreshData: number
+  ): any {
 
     //  if no search terms are defined...
     if(!searchTerms || searchTerms.replace(/"/g,"").length === 0){
@@ -33,12 +46,10 @@ export class GtSearchPipe<R extends GtRow> implements PipeTransform {
     let searchFunction: any = {};
     let fieldsTemp: Array<any> = [];
 
-    for(let k=0; k<fields.length; k++){
+    for(let k=0; k < fields.length; k++){
       let field = fields[k];
-
       // check if field should be included in global search
       const include = this.getProperty(settings,field.objectKey).search === false ? false:true;
-
       // if include...
       if(include){
 
@@ -61,22 +72,20 @@ export class GtSearchPipe<R extends GtRow> implements PipeTransform {
     let filteredRows: Array<any> = [];
     searchTerms = typeof searchTerms === 'undefined' ? '':searchTerms;
     const searchTermsArray = searchTerms.toLowerCase().match(/(".*"|[^\s]+)/g);
-
-    for(let i=0; i<allRows.length; i++){
+    for(let i=0; i < allRows.length; i++){
       let row = allRows[i];
       let string = '';
-
-      for(let j=0; j<fieldsTemp.length; j++){
+      for(let j=0; j < fieldsTemp.length; j++){
         let separator = j === 0 ? '':' & ';
         string += searchFunction[fieldsTemp[j].objectKey] ? separator + searchFunction[fieldsTemp[j].objectKey](row, j) : separator + row[fieldsTemp[j].objectKey];
       }
+
       string = string.toLowerCase();
       let match: Boolean = true;
 
-      for (let k=0; k<searchTermsArray.length; k++){
+      for (let k=0; k < searchTermsArray.length; k++){
         let term = searchTermsArray[k].replace(/"/g,'');
         match = string.indexOf(term) !== -1;
-
         if(!match){
           break;
         }

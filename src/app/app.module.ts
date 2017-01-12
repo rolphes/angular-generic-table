@@ -10,6 +10,11 @@ import { CustomRowComponent } from './custom-row/custom-row.component';
 import { StaticComponent } from './static/static.component';
 import { ExamplesComponent } from './examples/examples.component';
 import { AppRoutingModule } from './app-routing.module';
+import { MyTestComponent } from './my-test/my-test.component';
+import { MyPipePipe } from './my-pipe.pipe';
+import { TestPipePipe } from './test-pipe.pipe';
+import { TestSearchComponent } from './test-search/test-search.component';
+import { TestComponent } from './test/test.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +23,12 @@ import { AppRoutingModule } from './app-routing.module';
     RestComponent,
     CustomRowComponent,
     StaticComponent,
-    ExamplesComponent
+    ExamplesComponent,
+    MyTestComponent,
+    MyPipePipe,
+    TestPipePipe,
+    TestSearchComponent,
+    TestComponent
   ],
   imports: [
     BrowserModule,

@@ -1,7 +1,7 @@
 *
 !/generic-table/**/*
 !/src/generic-table/**/*
-!/src/index.ts
+!/src/test.index.ts
 !/index.js
 !/index.js.map
 !/index.d.ts

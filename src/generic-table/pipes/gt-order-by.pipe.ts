@@ -115,5 +115,4 @@ export class GtOrderByPipe<R extends GtRow> implements PipeTransform {
       });
     }
   }
-
 }

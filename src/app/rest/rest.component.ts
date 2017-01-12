@@ -1,4 +1,4 @@
-import {Component, Output, EventEmitter, ViewChild} from '@angular/core';
+import {Component, Output, EventEmitter, ViewChild, OnInit} from '@angular/core';
 import {Response, Http } from '@angular/http';
 import {GenericTableComponent} from '../../generic-table/components/generic-table.component';
 import {CustomRowComponent} from '../custom-row/custom-row.component';
@@ -23,15 +23,12 @@ export class RestComponent {
   public expandedRow = CustomRowComponent;
   public showColumnControls = false;
 
-
   constructor(private http: Http) {
 
     let url = 'https://private-730c61-generictable.apiary-mock.com/data'; // apiary end point
 
-
     this.configObject = {
-      settings:[
-          {
+      settings:[{
         objectKey:'id',
         visible:true,
         sort:'desc',
@@ -95,10 +92,12 @@ export class RestComponent {
       }],
       data:[]
     };
+
     http.get(url)
       .map((res: Response) => res.json())
       .subscribe(res => {
         this.configObject.data = res.data;
+        console.log(this.configObject.data);
       });
   }
 
@@ -135,8 +134,7 @@ export class RestComponent {
 
   /** Apply search
    * */
-  public applySearch = function(value: string){
+  public applySearch = function(value: string) {
     this.myTable.gtSearch(value);
   };
-
 }
