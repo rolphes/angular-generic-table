@@ -1,0 +1,18 @@
+<!--{{genericTable.gtSettings | json}}-->
+<div class="container-fluid">
+  <div class="row">
+    <h6 class="col">Visible</h6><h6 class="col">Hidden</h6>
+  </div>
+  <div class="row">
+    <div [dragula]='"first-bag"' class="col" data-visible=true>
+      <div *ngFor="let i = index;let column of genericTable.gtSettings | gtColumn:true" [attr.data-object-key]="column.objectKey">
+        {{i+1}}: {{column.objectKey}}
+      </div>
+    </div>
+    <div [dragula]='"first-bag"' class="col" data-visible=false>
+      <div *ngFor="let i = index;let column of genericTable.gtSettings | gtColumn:false" [attr.data-object-key]="column.objectKey">
+        {{i+1}}:{{column.objectKey}}
+      </div>
+    </div>
+  </div>
+</div>

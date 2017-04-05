@@ -9,6 +9,7 @@
     name:'basic.component.ts',
     src:'https://raw.githubusercontent.com/hjalmers/angular2-generic-table/master/src/app/basic/basic.component.ts'
   }]">
+      <gt-column-settings [genericTable]="myTable"></gt-column-settings>
       <generic-table [gtClasses]="'table-sm'" #myTable [gtSettings]="configObject.settings" [gtFields]="configObject.fields" [gtData]="configObject.data"></generic-table>
       <div class="text-center">
         <small><gt-table-info class="form-text text-muted mb-2" [genericTable]="myTable"></gt-table-info></small>
