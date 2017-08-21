@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, ViewChild, Injectable, Inject } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild, Injectable, Inject, ViewEncapsulation } from '@angular/core';
 import { GenericTableComponent, GtConfig, GtRow } from '@angular-generic-table/core';
 import { GtCustomComponent } from '../../../@angular-generic-table/core/components/gt-custom-component-factory';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
@@ -133,6 +133,10 @@ abstract class CustomColumnComponentBase extends GtCustomComponent<Row> implemen
     super();
   }
 
+  public click(event: Event) {
+    event.stopPropagation();
+  }
+
   ngOnInit() {
     const source = this.editService.ids
       .startWith(this.rowId)
@@ -146,8 +150,8 @@ abstract class CustomColumnComponentBase extends GtCustomComponent<Row> implemen
 
 @Component({
   template: `
-    <div *ngIf="edit | async" [ngClass]="{ 'has-danger': !isValid }">
-      <input type="text" class="form-control form-control-sm" [ngClass]="{'form-control-danger' : !isValid}" name="name" [(ngModel)]="name" required>
+    <div *ngIf="edit | async" [ngClass]="{ 'has-danger': !isValid }" (click)="click($event)">
+      <input type="text" class="form-control form-control-sm" [ngClass]="{'form-control-danger' : !isValid}" name="name" [(ngModel)]="name" required/>
     </div>
     <span *ngIf="view | async">{{row.name}}</span>
   `
@@ -185,8 +189,8 @@ export class RequiredNameComponent extends CustomColumnComponentBase {
 
 @Component({
   template: `
-    <div *ngIf="edit | async" [ngClass]="{ 'has-danger': !isValid }">
-      <input type="number" class="form-control form-control-sm" [ngClass]="{'form-control-danger' : !isValid}" name="number" [(ngModel)]="number" required>
+    <div *ngIf="edit | async" [ngClass]="{ 'has-danger': !isValid }" (click)="click($event)" >
+      <input type="number" class="form-control form-control-sm" [ngClass]="{'form-control-danger' : !isValid}" name="number" [(ngModel)]="number" required/>
     </div>
     <span *ngIf="view | async">{{row.lucky_number}}</span>
   `
@@ -224,8 +228,8 @@ export class RequiredNumberComponent extends CustomColumnComponentBase {
 
 @Component({
   template: `
-    <button *ngIf="view | async" class="btn btn-sm btn-secondary" (click)=click($event);><i class="fa fa-pencil"></i></button>
-    <button *ngIf="edit | async" class="btn btn-sm btn-success" [disabled]="!isValid" (click)=click($event);><i class="fa fa-check"></i></button>
+    <button *ngIf="view | async" class="btn btn-sm btn-secondary" (click)="click($event)"><i class="fa fa-pencil"></i></button>
+    <button *ngIf="edit | async" class="btn btn-sm btn-success" [disabled]="!isValid" (click)="click($event)"><i class="fa fa-check"></i></button>
   `
 })
 export class EditSaveButtonComponent extends CustomColumnComponentBase {
@@ -261,8 +265,8 @@ export class EditSaveButtonComponent extends CustomColumnComponentBase {
 
 @Component({
   template: `
-    <button *ngIf="view | async" class="btn btn-sm btn-danger" (click)=click($event);><i class="fa fa-trash-o"></i></button>
-    <button *ngIf="edit | async" class="btn btn-sm btn-secondary" (click)=click($event);><i class="fa fa-times"></i></button>
+    <button *ngIf="view | async" class="btn btn-sm btn-danger" (click)="click($event)"><i class="fa fa-trash-o"></i></button>
+    <button *ngIf="edit | async" class="btn btn-sm btn-secondary" (click)="click($event)"><i class="fa fa-times"></i></button>
   `
 })
 export class DeleteDiscardButtonComponent extends CustomColumnComponentBase {
@@ -286,6 +290,8 @@ export class DeleteDiscardButtonComponent extends CustomColumnComponentBase {
 @Component({
   selector: 'app-add-remove-edit',
   templateUrl: './add-remove-edit.component.html',
+  styleUrls: ['./add-remove-edit.component.scss'],
+  encapsulation: ViewEncapsulation.None,
   providers: [EditService, StateService]
 })
 export class AddRemoveEditComponent implements AfterViewInit {
